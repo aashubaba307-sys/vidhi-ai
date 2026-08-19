@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -93,11 +93,6 @@
       background: #6c5ce7;
       color: white;
       font-size: 20px;
-      cursor: pointer;
-    }
-
-    button:active {
-      transform: scale(0.95);
     }
   </style>
 </head>
@@ -122,8 +117,8 @@
       type="text"
       placeholder="Message Vidhi..."
       autocomplete="off"
-    />
-    <button onclick="sendMessage()">➤</button>
+    >
+    <button id="sendButton">➤</button>
   </div>
 
 </div>
@@ -131,6 +126,7 @@
 <script>
   const input = document.getElementById("input");
   const chat = document.getElementById("chat");
+  const sendButton = document.getElementById("sendButton");
 
   function addMessage(text, type) {
     const message = document.createElement("div");
@@ -148,4 +144,22 @@
     addMessage(text, "user");
     input.value = "";
 
-    setTimeout(() => {
+    setTimeout(function() {
+      addMessage(
+        "Message mil gaya ❤️ Abhi main web interface mein hoon. Backend connection next step mein add karenge.",
+        "ai"
+      );
+    }, 500);
+  }
+
+  sendButton.addEventListener("click", sendMessage);
+
+  input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  });
+</script>
+
+</body>
+</html>
