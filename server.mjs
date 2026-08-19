@@ -139,4 +139,4 @@ app.post('/chat', auth, rateLimit, async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Vidhi backend running on ${PORT}`));
+app.get('/', (req, res) => res.json({ ok: true, service: 'vidhi-ai' })); app.listen(PORT, () => console.log(`Vidhi backend running on ${PORT}`));
