@@ -1,65 +1,151 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mira AI</title>
+  <title>Vidhi AI</title>
+
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: Arial, sans-serif;
-      background: #111;
+      background: #0f1115;
       color: white;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .app {
-      max-width: 600px;
-      margin: auto;
       height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    header {
+    .header {
       padding: 18px;
+      background: #171a21;
+      border-bottom: 1px solid #292d36;
       text-align: center;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
-      border-bottom: 1px solid #333;
     }
 
-    #messages {
+    .header span {
+      color: #8b7cff;
+    }
+
+    .chat {
       flex: 1;
-      padding: 15px;
+      padding: 20px;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .message {
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 12px;
-      white-space: pre-wrap;
-    }
-
-    .user {
-      background: #333;
-      margin-left: 20%;
+      max-width: 82%;
+      padding: 12px 15px;
+      border-radius: 16px;
+      line-height: 1.4;
+      word-wrap: break-word;
     }
 
     .ai {
-      background: #222;
-      margin-right: 20%;
+      align-self: flex-start;
+      background: #1d222c;
     }
 
-    .input-area {
+    .user {
+      align-self: flex-end;
+      background: #6c5ce7;
+    }
+
+    .bottom {
+      padding: 12px;
+      background: #171a21;
+      border-top: 1px solid #292d36;
       display: flex;
-      padding: 10px;
       gap: 8px;
-      border-top: 1px solid #333;
     }
 
     input {
       flex: 1;
       padding: 14px;
-      border-radius: 10px;
-      border: 
+      border: none;
+      outline: none;
+      border-radius: 25px;
+      background: #252a34;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background: #6c5ce7;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    ✨ <span>Vidhi</span> AI
+  </div>
+
+  <div class="chat" id="chat">
+    <div class="message ai">
+      Namaste ❤️ Main Vidhi hoon. Tum mujhse kuch bhi pooch sakte ho.
+    </div>
+  </div>
+
+  <div class="bottom">
+    <input
+      id="input"
+      type="text"
+      placeholder="Message Vidhi..."
+      autocomplete="off"
+    />
+    <button onclick="sendMessage()">➤</button>
+  </div>
+
+</div>
+
+<script>
+  const input = document.getElementById("input");
+  const chat = document.getElementById("chat");
+
+  function addMessage(text, type) {
+    const message = document.createElement("div");
+    message.className = "message " + type;
+    message.textContent = text;
+    chat.appendChild(message);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function sendMessage() {
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    setTimeout(() => {
